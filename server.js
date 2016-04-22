@@ -10,7 +10,14 @@ function getTrackingInfo(trackingNumber){
 	console.log(constantes.url);
 	return new Promise(function(resolve, reject){
 		request.post(constantes.url, function(error, response, body){
+			console.log('Llegó la respuesta de correos De Chile');
 			var $ = cheerio.load(body);
+			if ($('.envio_no_existe').text()){
+				console.log($('.envio_no_existe').text());
+				resolve('El numero de seguimiento no existe');
+				return;
+			}
+			
 			var entradas = [];
 			cheerio.load($('.tracking').html())('tr').each(function(){
 				var entrada = { 
