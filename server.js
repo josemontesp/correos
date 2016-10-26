@@ -76,14 +76,11 @@ app.use(function(req, res, next) {
 });
 
 app.get('/:id', function (req, res) {
-	if (isNaN(req.params.id)){
-		res.send('el identificador de seguimiento tiene que ser un número');
-	}
 	else{
 		getTrackingInfo(req.params.id).then(function(r){
 			res.send(r);
 		});
-	}
+
 });
 
 var port = Number(process.env.PORT || 3003);
